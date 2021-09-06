@@ -1,0 +1,235 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Unified Transform Method for Systems of Non-Diagonalizable Differential Operators}
+\author{Naman Kedia }
+\date{July 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This paper focuses on extending the Unified Transform Method for Systems of Linear Equations as presented by Deconinck et al. to the case when the differential operator matrix is non-diagonalizable. It has been tested only for the $2 \times 2$ system case where the eigenvalue must itself be a polynomial.
+
+\section{System of PDEs}
+The system of PDEs is given by the following equations.
+Seek continuous functions $p, q$ valid over the half line which satisfy
+\begin{align}
+    q_t + q_{xx} &= 0 \label{eq:1} \\
+    p_t + p_{xx} + q &= 0. \label{eq:2}
+\end{align}
+The system of equations follow the general form of 
+\begin{equation} \label{eq:3}
+    Q_t + \Lambda(-i\partial_x)Q = 0
+\end{equation}
+which in this case is,
+\begin{equation} \label{eq:4}
+    \partial_t \left(\begin{array}{cc}
+        q   \\
+        p
+    \end{array}\right) +
+    \left(\begin{array}{cc}
+    \partial^2_x & 0 \\
+    1     & \partial^2_x
+    \end{array}\right)
+    \left(\begin{array}{cc}
+        q   \\
+        p
+    \end{array}\right)
+    = 0
+\end{equation}
+Note that $\Lambda(-i\partial_x)$ is non-diagonalizable.
+
+\section{Setting up the Global Relation}
+    Substitute
+\begin{equation} \label{eq:5}
+    Q = \left(\begin{array}{c}
+         Q_1  \\
+         \vdots \\
+         Q_n
+    \end{array} \right) e^{ikx - \omega t}
+\end{equation}
+in \eqref{eq:3}, where $k \in \mathbb{R}$, so that we get $\omega$ which satisfies
+\begin{equation} \label{eq:6}
+    \det(\Lambda(k) - \omega I) = 0.
+\end{equation}
+In our example, the dispersion relation is $\omega = k^2$. Furthermore, it is of importance to note that in this case there are no dispersion branches there is a 0 on the off-diagonal of this $2 \times 2$ matrix valued-polynomial. The implication of this is that there are no branch points for the given example, which may not always be the case.
+
+The local relation is obtained using Lax Pair Formulation and has the following structure,
+\begin{align}
+    (e^{-ikxI + \Lambda(k)t}Q)_t -(e^{-ikxI + \Lambda(k)t}X(x,t,k)Q)_x = 0 \label{eq:7} \\
+    (e^{-ikxI + J(k)t}P(k)Q)_t -(e^{-ikxI + J(k)t}P(k)X(x,t,k)Q)_x = 0 \label{eq:8}
+\end{align}
+where $J(k)$ is in Jordan Normal Form and is similar to $\Lambda(k)$ as given by,
+\begin{equation} \label{eq:9}
+   \Lambda(k) = P^{-1}(k)J(k)P(k)
+\end{equation}
+and $X(x,t,k)$ is a differential operator of degree at most $n-1$, polynomial in $k$, given by
+\begin{equation}\label{eq:10}
+    X(x,t,k) = i\left.\frac{\Lambda(k)-\Lambda(l)}{k-l}\right|_{l=i\partial_x} = \sum_{j=0}^{n-1}c_j(k)\partial^j_x.
+\end{equation}
+\section{Exponentiating Non-Diagonalizable Matrices}
+ In the previous section, we see the term, $e^{J(k)}$. In order to solve for this term, we need to use the fact that a matrix in Jordan Normal Form is the sum of a Diagonal Matrix $D$ and a Nilpotent matrix $M$, a null matrix with either 1 or 0 as the elements of the superdiagonal.
+\begin{equation}\label{eq:11}
+    J(k) = D(k) + M
+\end{equation}
+
+Exponentiating this matrix reduces to the product of the exponents of $D$ and $M$ respectively. 
+
+Exponentiating a diagonal matrix reduces to exponentiating its entries. 
+
+Exponentiating a Nilpotent matrix is reduced to applying it to the Maclaurin Series for the exponential function given by:
+\begin{equation}\label{eq:12}
+    e^M = \sum_{i=0}^{\infty}\frac{M^i}{i!}.
+\end{equation}
+For a nilpotent matrix $M$, there exists a finite $p$ such that
+\begin{equation}\label{eq:13}
+    M^p = 0,
+\end{equation}
+which means that the exponential is a finite computation.
+
+Ultimately, 
+\begin{equation}\label{eq:14}
+    e^{J(k)} = e^{D(k)}e^M.
+\end{equation}
+    
+\section{Local Relation}
+    Using \eqref{eq:8}, we see that our local relations for the given example are:
+    \begin{align}
+        (e^{-ikx+k^{2}t}(q+p))_t - (e^{-ikx+k^{2}t}(ik(q+p) + (q_x + p_x)))_x &= 0 \label{eq:15}\\
+        (e^{-ikx+k^{2}t}q)_t - (e^{-ikx+k^{2}t}(ikq + q_x))_x &= 0. \label{eq:16}
+    \end{align}
+    Note that one equation is part of the other and substituting its value as 0 gives us an equation identical to \eqref{eq:16} with $p$ in all places except for $q$. However, we still choose to continue using \eqref{eq:15} and \eqref{eq:16}.
+    
+    Some of the matrices used for this are
+    \begin{equation} \label{eq:17}
+        A = \left(\begin{array}{cc}
+        0  &  1 \\
+        1  &  0
+        \end{array}\right), 
+        \hspace{0.5pc}X\left(\begin{array}{c}
+            q  \\
+             p
+        \end{array}\right)
+        = \left(\begin{array}{c}
+            ikq + q_x  \\
+            ikp + p_x
+        \end{array}\right)
+    \end{equation}
+    and 
+    \begin{equation} \label{eq:18}
+        e^{J(k)} = \left(\begin{array}{cc}
+         e^{k^2t} & e^{k^2t}  \\
+         0    &  e^{k^2t} 
+        \end{array}\right).
+    \end{equation}
+\section{Global Relation}
+    We integrate with respect to $x$ and $s$, where $t$ has been renamed to $s$ along the half line and from 0 to $t$ respectively.
+    
+    Integrating \eqref{eq:7}, \eqref{eq:8} as explained above give you the following equations respectively
+    \begin{align}
+        \hat{Q}_0(k) - e^{\Lambda(k)t}\hat{Q}(k,t) - G(k,t) &= 0 \label{eq:19} \\
+        P(k)\hat{Q}_0(k) - e^{J(k)t}P(k)\hat{Q}(k,t) - \Tilde{G}(k,t) &= 0 \label{eq:20}
+    \end{align}
+where
+\begin{align}
+    &\hat{Q}_0(k) = \int_0^{\infty}e^{-ikx}Q_0(x)dx, 
+    \hspace{2pc} \hat{Q}(k,t) = \int_0^{\infty}e^{-ikx}Q(x,t)dx, \label{eq:21}\\
+    &G(k,t) = \int_0^t e^{\Lambda(k)s}X(0,s,k)Q(0,s)ds, \label{eq:22}\\ 
+    &\Tilde{G}(k,t) \int_0^t e^{J(k)s}P(k)X(0,s,k)Q(0,s)ds. \label{eq:23}
+\end{align}
+
+The Global Relations for the example are taken solved for using \eqref{eq:15} and \eqref{eq:16}, and are the following:
+\begin{multline} \label{eq:24}
+   e^{k^2t}(\hat{q}(x,t) + \hat{p}(x,t)) - (\hat{q}_0 + \hat{p}_0) - ik(f_0(q,0,t,k) + f_0(p,0,t,k)) \\ - (f_1(q,0,t,k) + f_1(p,0,t,k)) = 0 
+\end{multline}
+\begin{equation} \label{eq:25}
+    e^{k^2t}\hat{q}(x,t) - \hat{q}_0 - ikf_0(q,0,t,k) -f_1(q,0,t,k) = 0
+\end{equation}
+where
+\begin{equation} \label{eq:26}
+    f_j(\rho, X, T, k) = \int_0^T e^{k^2s} \partial^j_x\rho(X,s) ds. 
+\end{equation}
+
+\section{Ehrenpreis Form}
+After obtaining this Global Relation we attempt to obtain the Ehrenpreis form for this expression. To do this we first solve for $Q(x,t)$. We obtain the following expressions for \eqref{eq:19} and \eqref{eq:20} respectively,
+\begin{equation} \label{eq:27}
+    Q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+\Lambda(k)t}\hat{Q}_0(k)dk - \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+\Lambda(k)t}G(k,t)dk,
+\end{equation}
+and
+\begin{multline}\label{eq:28}
+    Q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}P^{-1}(k)e^{-ikx+J(k)t}P(k)\hat{Q}_0(k)dk \\ - \frac{1}{2\pi}\int_{-\infty}^{\infty}P^{-1}(k)e^{-ikx+J(k)t}P(k)\Tilde{G}(k,t)dk.
+\end{multline}
+
+Using \eqref{eq:28} we see that our formulae for $q(x,t)$ and $p(x,t)$ are the following,
+\begin{multline} \label{eq:29}
+    q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}\hat{q}_0 dk - \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}(ik(f_0(q,0,t,k) \\ + f_0(p,0,t,k)) + f_1(q,0,t,k) + f_1(p,0,t,k))dk,
+\end{multline}
+\begin{multline} \label{eq:30}
+    p(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}(\hat{q}_0 + \hat{p}_0)dk - \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}(ik(2f_0(q,0,t,k) \\ + f_0(p,0,t,k)) + 2f_1(q,0,t,k) + f_1(p,0,t,k))dk.
+\end{multline}
+
+We define the $D^{+}$ to be,
+\begin{equation} \label{eq:31}
+    D^+ = \bigcup_{j=1}^N\{k \in \mathbb{C}: \operatorname{Im} k > 0, \operatorname{Re} \omega(k) < 0\}.
+\end{equation}
+
+For $k \in \mathbb{C} \setminus D^+$, the integrand of the second term decays exponentially as $k \to \infty$ and due to Jordan's Lemma and Cauchy's Theorem, we can rewrite \eqref{eq:27} - \eqref{eq:30} as
+\begin{equation} \label{eq:32}
+    Q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+\Lambda(k)t}\hat{Q}_0(k)dk - \frac{1}{2\pi}\int_{\partial D^+}e^{-ikx+\Lambda(k)t}G(k,t)dk,
+\end{equation}
+\begin{multline}\label{eq:33}
+    Q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}P^{-1}(k)e^{-ikx+J(k)t}P(k)\hat{Q}_0(k)dk \\ - \frac{1}{2\pi}\int_{\partial D^+}P^{-1}(k)e^{-ikx+J(k)t}P(k)\Tilde{G}(k,t)dk,
+\end{multline}
+\begin{multline} \label{eq:34}
+    q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}\hat{q}_0 dk - \frac{1}{2\pi}\int_{\partial D^+}e^{-ikx+k^2t}(ik(f_0(q,0,t,k) \\ + f_0(p,0,t,k)) + f_1(q,0,t,k) + f_1(p,0,t,k))dk.
+\end{multline}
+\begin{multline} \label{eq:35}
+    p(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}(\hat{q}_0 + \hat{p}_0)dk - \frac{1}{2\pi}\int_{\partial D^+}e^{-ikx+k^2t}(ik(2f_0(q,0,t,k) \\ + f_0(p,0,t,k)) + 2f_1(q,0,t,k) + f_1(p,0,t,k))dk.
+\end{multline}
+There are no singularities or branch points, so the integration path need not be deformed for this example. However, other more complicated examples with more equations in the system might have branch points which require the deformation of the contour.
+
+\section{Boundary Conditions and Dealing with Unknowns}
+For this example we assume our boundary conditions to be
+\begin{equation}\label{eq:36}
+    q(0,t) = bp(0,t), \hspace{0.75pc} \text{and} \hspace{0.75pc} q_x(0,t) = \beta p_x(0,t).
+\end{equation}
+This means that all our equations can be expressed in terms of two unknowns only, $f_0(p,0,t,k)$ and $f_1(p,0,t,k)$. To deal with these unknowns we first apply a map to the Global Relation which leaves these unknowns invariant.
+
+For these unknowns the maps, $k \to k$ and $k \to -k$ leave them invariant and thus by applying the second one, we get a Global Relations valid in the upper half of the plane.
+
+The new global relations are 
+\begin{multline} \label{eq:37}
+   e^{k^2t}(\hat{q}(-k,t) + \hat{p}(-k,t)) - (\hat{q}_0(-k) + \hat{p}_0(-k)) + ik(b+1)f_0(p,0,t,k) \\ - (\beta+1) f_1(p,0,t,k) = 0 
+\end{multline}
+and
+\begin{equation} \label{eq:38}
+    e^{k^2t}\hat{q}(-k,t) - \hat{q}_0(-k) + ikf_0(q,0,t,k) -f_1(q,0,t,k) = 0.
+\end{equation}
+
+We can then apply Cramer's Rule to this two equation system containing two unknowns to get the following expressions for our unknowns,
+\begin{equation} \label{eq:39}
+    f_0(p,0,t,k) = \frac{e^{k^2t}(\beta\hat{p}(-k,t) - \hat{q}(-k,t)) - (\beta\hat{p}_0(-k) - \hat{q}_0(-k))}{ik(b-\beta)},
+\end{equation}
+\begin{equation} \label{eq:40}
+    f_1(p,0,t,k) = \frac{e^{k^2t}(b\hat{p}(-k,t) - \hat{q}(-k,t)) - (b\hat{p}_0(-k) - \hat{q}_0(-k))}{(b-\beta)}.
+\end{equation}
+
+We can resubstitute this into the Ehrenpreis Form to get a final expression independent of boundary values and perform asymptotic analysis to show the decay of the second integral. Thus, we get
+\begin{multline} \label{eq:41}
+    q(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}\hat{q}_0 dk -  \frac{1}{2\pi}\int_{\partial D^+}e^{-ikx+k^2t}\\(ik(b+1)\left(\frac{e^{k^2t}(\beta\hat{p}(-k,t) - \hat{q}(-k,t)) - (\beta\hat{p}_0(-k) - \hat{q}_0(-k))}{ik(b-\beta)} \right) \\ + 
+    (\beta + 1) \left(\frac{e^{k^2t}(b\hat{p}(-k,t) - \hat{q}(-k,t)) - (b\hat{p}_0(-k) - \hat{q}_0(-k))}{(b-\beta)} \right)) dk,
+\end{multline}
+\begin{multline} \label{eq:42}
+    p(x,t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx+k^2t}(\hat{q}_0 + \hat{p}_0)dk - \frac{1}{2\pi}\int_{\partial D^+}e^{-ikx+k^2t}\\ (ik(2b+1)\left(\frac{e^{k^2t}(\beta\hat{p}(-k,t) - \hat{q}(-k,t)) - (\beta\hat{p}_0(-k) - \hat{q}_0(-k))}{ik(b-\beta)} \right) \\ + (2\beta + 1)\left(\frac{e^{k^2t}(b\hat{p}(-k,t) - \hat{q}(-k,t)) - (b\hat{p}_0(-k) - \hat{q}_0(-k))}{(b-\beta)} \right))dk.
+\end{multline}
+
+\section{Conclusion}
+After conducting asymptotic analysis, we would have completed this UTM. However, this only serves as the base case for systems. Further cases need to be evaluated, such as those having multiple dispersion branches for the dispersion relation in higher dimensional systems. However, whether those exist for non-diagonalizable systems are yet to be determined.
+
+In case that does not exist, there is the possibility of using an inductive argument can be used to prove that there are only polynomial eigenvalues for non-diagonalizable matrices, using the proof displayed in another paper as the base case.
+\end{document}

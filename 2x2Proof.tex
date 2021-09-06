@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{2x2 Non-Diagonalizable Proof}
+\author{Naman Kedia }
+\date{July 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This proof will show that for a $2 \times 2$ system, the only matrix polynomial possible is when the eigenvalue is a polynomial in $k$ (or $\lambda$ depending on source) itself.
+
+\section{Same Eigenvalue}
+It is apparent that the eigenvalues of a non-diagonalizable $2 \times 2$ matrix must because if there are 2 Jordan Blocks of dimension 1, the matrix would be diagonalizable which is against our assumption for the proof.
+
+Thus, there is one Jordan Block of dimension 1, and since all diagonal elements of a Jordan Block have the same eigenvalue, the Matrix Polynomial to be determined must have the same eigenvalue.
+
+\section{Proof}
+Let $\Lambda$ be a matrix polynomial in $k$, $P$ be the similarity transformation and $J$ be the matrix expressed in Jordan Normal Form, such that
+$$\Lambda = PJP^{-1}.$$
+The right hand side can be represented as
+$$\left(\begin{array}{cc}
+    a & b \\
+    c & d
+\end{array}\right)
+\left(\begin{array}{cc}
+    \Omega & 1 \\
+    0 & \Omega
+\end{array}\right)
+\left(\begin{array}{cc}
+    a & b \\
+    c & d
+\end{array}\right)^{-1}.$$
+Multiplying the matrices gives us a general expression for $\Lambda$ as 
+$$\Lambda = \left(\begin{array}{cc}
+    \Omega - \frac{ac}{ad-bc} & a^2 \\
+    -c^2 & \Omega + \frac{ac}{ad-bc}
+\end{array}\right).$$
+However, since $\Lambda$ is also a matrix polynomial, we must have that
+$$\Lambda = \sum_{i=0}^{n} k^i A_i$$
+where $A_i$ refers to a matrix with complex entries.
+
+Substituting $X$ for $\frac{ac}{ad-bc}$, equating the two expressions and considering the diagonal entries only, we get the following system of equations.
+\begin{align*}
+    \Omega - X = \sum_{i=0}^{n}\alpha_ik^i \\
+    \Omega + X = \sum_{i=0}^{n}\beta_ik^i.
+\end{align*}
+Solving for $\Omega$, we get that
+$$\Omega = \sum_{i=0}^{n}\frac{(\alpha_i - \beta_i)}{2}k^i.$$
+
+\section{Conclusion}
+From this, we learn that using the Unified Transform Method for a $2 \times 2$ System of PDEs with a non-diagonalizable matrix-valued polynomial reduces to the general case when its eigenvalue is a polynomial itself. 
+\end{document}
